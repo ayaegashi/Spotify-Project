@@ -5,7 +5,6 @@ class ChordVis {
     constructor(_parentElement, _data) {
         this.parentElement = _parentElement;
         this.data = _data;
-        // this.originalData = this.data;
         this.arrangedData = [];
         this.n = 0;
 
@@ -137,19 +136,6 @@ class ChordVis {
     wrangleData() {
         let vis = this;
 
-
-        // console.log(vis.originalData)
-        // let minStreams = d3.min(vis.originalData, d => d.streams);
-        // let maxStreams = d3.max(vis.originalData, d => d.streams);
-        // console.log(minStreams)
-        // console.log(maxStreams)
-
-        // find max and min streams
-        // create n even partitions of streamsmost
-        // consolidate artists who appear more than once on  streamed list
-        // for each artist, keep track of flow of streams based on release date
-        // need n x n square matrix
-
         // Filtering and sorting data; finding max and min by streams
         vis.arrangedData = vis.data.filter(d => {
             return d.streams >= 1000000;
@@ -218,21 +204,13 @@ class ChordVis {
 
                     currHitStreamsFloor = prevHitStreamsFloor;
                     currIndex = prevIndex;
-
-
-
-
                 }
                 count++;
-                // console.log(artistArray);
 
             }
         }
-        // console.log(count);
 
         vis.updateVis();
-
-
     }
 
     updateVis() {
@@ -355,11 +333,8 @@ class ChordVis {
             })
             .style("font-size", 9)
 
-        // vis.svg.attr("transform", "translate("+(vis.width / 3)+",300)")
 
-
-
-// Returns an array of tick angles and values for a given group and step.
+        // Returns an array of tick angles and values for a given group and step.
         function groupTicks(d) {
             return [{value: 0, angle: d.startAngle}, {value: d.value, angle: d.endAngle}]
         }
@@ -375,8 +350,5 @@ class ChordVis {
             else
                 return "#FFD9CE";
         }
-
-
     }
-
 }

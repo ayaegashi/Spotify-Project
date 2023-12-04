@@ -21,8 +21,6 @@ class CloserLookVis {
             })
         })
 
-        this.formatDate = d3.timeFormat("%Y-%m-%d");
-
         this.artist = data[artistIndex].artist_name;
 
         this.initVis();

@@ -3,12 +3,10 @@ class BubbleVis {
     constructor(_parentElement, _data) {
         this.parentElement = _parentElement;
         this.data = _data;
-        // this.originalData = this.data;
         this.arrangedData = [];
         this.selection = "2016-2020";
         this.lowYear = +this.selection.slice(0,4);
         this.highYear = +this.selection.slice(5,9);
-
 
         this.initVis();
     }
@@ -106,17 +104,12 @@ class BubbleVis {
             }
         });
 
-        // console.log("countingDict")
-        // console.log(countingDict)
         for (const indivArtist in countingDict) {
             vis.arrangedData.push({
                 artist: indivArtist,
                 count: countingDict[indivArtist]
             })
         }
-        // console.log("vis.arrangedData")
-        // console.log(vis.arrangedData)
-
 
         vis.updateVis();
 
@@ -136,8 +129,6 @@ class BubbleVis {
         vis.nodes = d3.range(numNodes).map(function(d, i) {
             return {radius: vis.areaScale(vis.arrangedData[i].count), artist: vis.arrangedData[i].artist, count: vis.arrangedData[i].count}
         })
-        // console.log("nodes")
-        // console.log(vis.nodes)
 
 
         let tickCount = 0;
@@ -151,7 +142,6 @@ class BubbleVis {
 
 
         function ticked() {
-            // console.log("in ticked")
             vis.svg.selectAll("circle").remove();
 
             vis.svg.selectAll('circle')
@@ -199,16 +189,7 @@ class BubbleVis {
                         .style("top", 0)
                         .html(``);
                 })
-
-
-
         }
-
-
-
-
-
     }
-
 }
 

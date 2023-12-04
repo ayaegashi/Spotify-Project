@@ -42,12 +42,9 @@ select {
 }
 
 .next {
-	/*position: absolute;*/
 	width: 100px;
 	height: 40px;
 	margin-left: 10px;
-	/*margin-top: 130px;*/
-	/*transform: translate(4vw, 91vh);*/
 }
 
 .prev {
@@ -65,7 +62,6 @@ select {
 	position: absolute;
 	width: 70px;
 	height: 40px;
-	/*margin-top: 130px;*/
 	transform: translate(4vw, 43vh);
 }
 
@@ -73,7 +69,6 @@ select {
 	position: absolute;
 	width: 100px;
 	height: 40px;
-	/*margin-top: 130px;*/
 	transform: translate(-4vw, 43vh);
 }
 
@@ -114,7 +109,6 @@ text {
 }
 
 .slide {
-	/*display: grid;*/
 	background-color: #171738;
 	height: 100vh;
 	min-height: 700px;
@@ -142,10 +136,8 @@ text {
 	margin-top: 20px;
 	margin-bottom: 30px;
 	font-family: Tahoma;
-	/*font-weight: bold;*/
 	color: white;
 	font-size: 30px;
-	/*margin-left: 20px;*/
 	align-self: center;
 }
 #yearRange {
@@ -172,8 +164,6 @@ text {
 	background-color: #C5D86D; /* Set the background color of the label */
 	border: 1px solid darkgreen; /* Add a border to the label */
 	border-radius: 5px;
-
-
 }
 
 #sliderContainer {
@@ -187,10 +177,8 @@ text {
 }
 
 #summaryStats {
-	/*position: absolute;*/
 	padding: 10px;
 	border: 3px solid #FFD9CE;;
-	/*border-radius: 10px;*/
 	width: 350px;
 	height: 300px;
 	background-color: #FFD9CE;
@@ -210,19 +198,6 @@ text {
 	color: #593C8F;
 }
 
-#hist-container{
-	/*padding: 10px;*/
-	/*border: 2px solid darkgreen;;*/
-	/*border-radius: 5px;*/
-	/*background-color: whitesmoke;*/
-}
-
-/*#message-container{*/
-/*	color: white;*/
-/*	font-size: 20px;*/
-/*	height: 300px;*/
-
-/*}*/
 
 #message-title{
 	font-weight: bold;
@@ -331,6 +306,5 @@ text {
 	position: absolute;
 	width: 100px;
 	height: 40px;
-	/*margin-top: 130px;*/
 	transform: translate(-42vw, 3vh);
 }

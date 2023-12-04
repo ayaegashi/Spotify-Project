@@ -49,6 +49,8 @@ async function createVis(data) {
     bubbleSelectBox.addEventListener('change', bubbleSelection);
     let artistSelectBox = document.getElementById('artist-select');
     artistSelectBox.addEventListener('change', artistSelection);
+
+    // Create visualizations
     bubbleVis = new BubbleVis("bubbleVis", topHits);
     chordVis = new ChordVis("chordVis", mostStreamed2023);
     histVis = new HistVis("histVis", topHits);

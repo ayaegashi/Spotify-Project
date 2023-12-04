@@ -2,7 +2,6 @@ class HistVis {
 
     constructor(_parentElement, _data) {
         this.parentElement = _parentElement;
-        //this.formElement = _formElement;
         this.data = _data;
         this.data.forEach(d => {
             d.duration_ms = +d.duration_ms / 60000;
@@ -84,21 +83,15 @@ class HistVis {
             vis.selectedYear = 2019;
         }
 
-        //console.log("selected year", vis.selectedYear);
-
         vis.displayData = vis.data;
         vis.displayData = vis.displayData.filter(d => d.year === vis.selectedYear);
 
-        // console.log("filtered", vis.displayData);
-
         vis.updateVis();
-
-
     }
 
     updateVis() {
         let vis = this;
-        //console.log(d3.max(vis.displayData, function(d){return d.duration_ms}))
+
         vis.x = d3.scaleLinear()
             .domain([d3.min(vis.displayData, function(d){return d.duration_ms}), d3.max(vis.displayData, function(d){return d.duration_ms})])
             .range([0, vis.width]);
@@ -109,8 +102,6 @@ class HistVis {
             .thresholds(vis.x.ticks(10));
 
         vis.bins = vis.histogram(vis.displayData)
-
-        //console.log('bins', vis.bins)
 
         vis.y = d3.scaleLinear()
             .range([vis.height, 0]);
@@ -163,8 +154,6 @@ class HistVis {
 
         // Add summary statistics
         let meanDuration = d3.mean(vis.displayData, d => d.duration_ms);
-        //let medDuration = d3.median(vis.displayData, d => d.duration_ms);
-        //let modeDuration = d3.mode(vis.displayData, d => d.duration_ms);
         let maxDuration = d3.max(vis.displayData, d => d.duration_ms);
         let minDuration = d3.min(vis.displayData, d => d.duration_ms);
 
@@ -178,8 +167,5 @@ class HistVis {
             <p class="sumlines"><strong>Max Duration:</strong> ${maxDuration.toFixed(2)} min</p>
             <p class="sumlines"><strong>Min Duration:</strong> ${minDuration.toFixed(2)} min</p>
         `);
-
-
-
     }
 }
