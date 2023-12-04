@@ -97,6 +97,7 @@ class CloserLookVis {
 
         vis.selectedData.sort((a,b)=> a.release_date - b.release_date)
 
+        // Create data structure by albums
         vis.displayData = vis.selectedData
             .map(d => d.album)
             .filter((s, i, self) => self.indexOf(s) == i)
@@ -108,6 +109,7 @@ class CloserLookVis {
                 };
             });
 
+        // Group rows of dataset by album
         vis.selectedData.forEach(function(d){
             vis.displayData.forEach(function(i){
                 if (i.album === d.album) {
