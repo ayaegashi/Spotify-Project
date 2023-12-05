@@ -20,6 +20,18 @@ artist_uris = [
 
 artists = ["BTS", "Beyonce", "TSwift", "RadioHead", "MCR", "TheWeeknd", "KendrickLamar", "Queen"]
 
+artist_profiles = []
+for i, uri in enumerate(artist_uris):
+    artist = sp.artist(uri)
+    artist_profiles.append(artist)
+
+    json_object = json.dumps(artist_profiles, indent=4)
+
+    # Writing to artists.json
+    with open(f"Data/artists.json", "w") as outfile:
+        outfile.write(json_object)
+
+
 for i, uri in enumerate(artist_uris):
     results = sp.artist_albums(uri, album_type='album')
     albums = results['items']

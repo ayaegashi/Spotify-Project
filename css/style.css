@@ -112,10 +112,17 @@ text {
 	background-color: #171738;
 	height: 100vh;
 	min-height: 700px;
+	max-height: fit-content;
 	width: auto;
 	justify-content: center;
 	text-align: center;
 	padding: 0;
+}
+
+@media only screen and (max-width: 1180px) {
+	#closer-look-container.slide {
+		height: 1200px;
+	}
 }
 
 .filler {
@@ -253,26 +260,43 @@ text {
 }
 
 #info-box {
+	display: flex;
 	text-align: center;
 	align-items: center;
 	justify-content: center;
 	color: white;
-	width: 560px;
+	width: 530px;
 	height: 450px;
+}
+
+@media only screen and (max-width: 1200px) {
+	#info-box {
+		margin-top: 50px;
+	}
 }
 
 #info {
 	display: flex;
 	flex-direction: row;
-	width: 560px;
+	align-items: center;
+	width: 530px;
 	padding: 20px;
 	margin-left: 10px;
+}
+
+#artist-image {
+	max-width: 250px;
 }
 
 #closer-look-title {
 	color: white;
 	font-size: 30px;
 	/*margin-left: 20px;*/
+}
+
+.genre-text {
+	font-weight: bold;
+	color: #C5D86D;
 }
 
 #attributes {

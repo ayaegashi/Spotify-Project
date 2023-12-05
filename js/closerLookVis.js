@@ -1,12 +1,13 @@
 
 class CloserLookVis {
 
-    constructor(_parentElement, data, artistIndex) {
+    constructor(_parentElement, album_data, artist_data, artistIndex) {
         this.parentElement = _parentElement;
-        this.data = data;
+        this.albums = album_data;
+        this.artists = artist_data;
         this.index = artistIndex;
 
-        this.data.forEach(dataset => {
+        this.albums.forEach(dataset => {
             dataset.artist_data.forEach(d => {
                 d["acousticness"] = +d["acousticness"];
                 d["danceability"] = +d["danceability"];
@@ -21,7 +22,10 @@ class CloserLookVis {
             })
         })
 
-        this.artist = data[artistIndex].artist_name;
+        console.log(this.albums)
+        this.artist = this.albums[artistIndex].artist_name;
+
+        this.numberFormat = d3.format(",");
 
         this.initVis();
     }
@@ -30,10 +34,11 @@ class CloserLookVis {
     initVis() {
         let vis = this;
 
-        vis.margin = { top: 50, right: 20, bottom: 110, left: 60 };
+        //// Initialize SVG for line graph ////
+        vis.margin = { top: 30, right: 20, bottom: 220, left: 60 };
 
         vis.width = 580 - vis.margin.left - vis.margin.right;
-        vis.height = 440 - vis.margin.top - vis.margin.bottom;
+        vis.height = 460 - vis.margin.top - vis.margin.bottom;
 
         // SVG drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -42,16 +47,30 @@ class CloserLookVis {
             .append("g")
             .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-        document.getElementById("closer-look-title").innerHTML = `A Closer Look: ${this.artist}`;
+        // Let user know they can click on the dots
+        vis.svg.append("text").attr("font-size", 15)
+            .text("Click on the dots to learn about an album!")
+            .attr("text-anchor", "middle")
+            .attr("transform", `translate(${vis.width / 2}, -15)`)
 
+        // Add explanatory text for line graph and "popularity" metric
+        vis.svg.append("text").attr("font-size", 15)
+            .text(`The line graph above plots the popularity of each album.`)
+            .attr("transform", `translate(-20, ${vis.height + 160})`)
+        vis.svg.append("text").attr("font-size", 15)
+            .text("Popularity is a score between 0 and 100 (with 100 being the most popular),")
+            .attr("transform", `translate(-20, ${vis.height + 177})`)
+        vis.svg.append("text").attr("font-size", 15)
+            .text("calculated by Spotify's internal algorithm. The score is based on the total")
+            .attr("transform", `translate(-20, ${vis.height + 194})`)
+        vis.svg.append("text").attr("font-size", 15)
+            .text("number of plays an album's tracks have had and how recent those plays are.")
+            .attr("transform", `translate(-20, ${vis.height + 211})`)
+
+        // Add div for linked bar chart visualizations
         vis.infoBox = d3.select("#info-box")
             .append("div")
             .attr("id", "info");
-
-        vis.infoBox
-            .append("div")
-            .text("Click on the dots to learn about an album!")
-            .style("margin-top", "170px")
 
         // Initialize scales
         vis.x = d3.scalePoint()
@@ -91,8 +110,7 @@ class CloserLookVis {
     wrangleData() {
         let vis = this;
 
-        document.getElementById('closer-look-title').innerHTML = `A Closer Look: ${vis.data[vis.index].artist_name}`;
-        vis.selectedData = vis.data[vis.index].artist_data;
+        vis.selectedData = vis.albums[vis.index].artist_data;
         console.log(vis.selectedData);
 
         vis.selectedData.sort((a,b)=> a.release_date - b.release_date)
@@ -131,6 +149,22 @@ class CloserLookVis {
 
     updateVis() {
         let vis = this;
+
+        // Update Title
+        document.getElementById('closer-look-title').innerHTML = `A Closer Look: ${vis.albums[vis.index].artist_name}`;
+
+        // Set default for info box
+        vis.infoBox.html("")
+        vis.infoBox.style("flex-direction", "column").style("background-color", "transparent")
+        vis.infoBox.append("img").attr("id", "artist-image")
+            .attr("src", vis.artists[vis.index].images[1].url)
+        vis.infoBox.append("div").style("margin-top", "20px")
+            .text(`${vis.albums[vis.index].artist_name} has 
+                    ${vis.numberFormat(vis.artists[vis.index].followers.total)} followers on Spotify!`)
+        vis.infoBox.append("div")
+            .text("Their music falls into the following genres:")
+        vis.artists[vis.index].genres.forEach(g => vis.infoBox.append("div").attr("class", "genre-text").text(g))
+
 
         // Function to truncate long text
         let wrap = function() {
@@ -218,6 +252,7 @@ class CloserLookVis {
 
         vis.infoBox.style("background-color", "#593C8F")
         vis.infoBox.html("");
+        vis.infoBox.style("flex-direction", "row");
         let left = vis.infoBox.append("div").attr("class", "col").style("margin-left", "10px");
         let right = vis.infoBox.append("div").attr("class", "col").attr("id", "attributes");
 

@@ -16,7 +16,8 @@ let promises = [
     d3.json("Data/MCR.json"),
     d3.json("Data/Queen.json"),
     d3.json("Data/RadioHead.json"),
-    d3.json("Data/TSwift.json")
+    d3.json("Data/TSwift.json"),
+    d3.json("Data/artists.json")
 ];
 
 Promise.all(promises)
@@ -42,6 +43,7 @@ async function createVis(data) {
         { artist_name: "Radio Head", artist_data: data[8] },
         { artist_name: "Taylor Swift", artist_data: data[9] }
     ]
+    let artistsData = data[10];
 
     let genreButtons = document.getElementsByClassName('genre-button');
     Array.from(genreButtons).forEach(gb => gb.addEventListener('click', () => genreButton(gb.id)));
@@ -55,7 +57,7 @@ async function createVis(data) {
     chordVis = new ChordVis("chordVis", mostStreamed2023);
     bubbleVis = new BubbleVis("bubbleVis", topHits);
     histVis = new HistVis("histVis", topHits);
-    closerLookVis = new CloserLookVis("closerLookVis", closerLookData, 0);
+    closerLookVis = new CloserLookVis("closerLookVis", closerLookData, artistsData, 0);
 }
 
 
