@@ -55,13 +55,13 @@ class ChordVis {
                     .attr('fill', 'black')
                     .attr("opacity", "100%");
 
-                vis.tooltip
+                vis.questionTooltip
                     .style("fill", "white")
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(`
-                         <div style="border: thin solid grey; border-radius: 5px; background: #f7e4f7; padding: 5px; height: 100px; width: 300px">
+                         <div style="border: thin solid grey; border-radius: 5px; background: #f7e4f7; padding: 5px; width: 300px">
                              <p><b>How to read:</b> Follow a chord from one range of 100 million streams to another, and use the legend to match the chord to an increase, decrease, or maintenance of streams.</p>                   
                          </div>`);
             })
@@ -72,7 +72,7 @@ class ChordVis {
                     .attr("stroke-width", 0.25)
                     .attr("opacity", "80%");
 
-                vis.tooltip
+                vis.questionTooltip
                     .style("opacity", 0)
                     .style("left", 0)
                     .style("top", 0)
