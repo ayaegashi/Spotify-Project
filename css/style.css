@@ -98,10 +98,16 @@ select {
 }
 
 #bubble-select {
-	width: 11%;
-	margin-top: 20px;
-	margin-bottom: 0;
-	margin-left: 850px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-left: 300px;
+}
+
+.select-box-text {
+	text-align: left;
+	color: white;
+	margin-left: 300px;
 }
 
 text {
@@ -125,6 +131,11 @@ text {
 	}
 }
 
+#bubble-slide.slide {
+	height: auto;
+	min-height: auto;
+}
+
 .filler {
 	background-color: #171738;
 	height: 300px;
@@ -140,11 +151,11 @@ text {
 
 
 #hist-title {
-	margin-top: 20px;
-	margin-bottom: 30px;
+	margin-top: 40px;
+	margin-bottom: 0px;
 	font-family: Tahoma;
 	color: white;
-	font-size: 30px;
+	font-size: 24px;
 	align-self: center;
 }
 #yearRange {

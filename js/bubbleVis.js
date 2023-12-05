@@ -37,10 +37,20 @@ class BubbleVis {
         vis.colorScale = d3.scaleLinear()
             .range(['#d0dba3','#90a540'])
 
+        // Title for Bubble Visualization and Histogram
         vis.svg.append("text")
-            .attr("x", vis.width / 3 - 15)
+            .attr("x", vis.width / 2)
             .attr("y", 30)
+            .attr("text-anchor", "middle")
             .attr("font-size", 30)
+            .text("Selected Musical Data from Between 2000 and 2020")
+
+        // Subtitle for Bubble Visualization
+        vis.svg.append("text")
+            .attr("x", vis.width / 2)
+            .attr("y", 70)
+            .attr("text-anchor", "middle")
+            .attr("font-size", 24)
             .text("Number of Hits by Top Artists by Year")
 
         vis.svg.append("text")
@@ -48,6 +58,7 @@ class BubbleVis {
             .attr("y", 200)
             .attr("text-anchor", "end")
             .attr("font-size",17)
+            .attr("color", "#C5D86D")
             .text("Hover over a bubble to find out top artists and their hit count!")
 
         vis.svg.append("text")
@@ -141,9 +152,8 @@ class BubbleVis {
             })
         }
 
+        console.log("Bubble vis data", vis.arrangedData)
         vis.updateVis();
-
-
     }
 
     updateVis() {
