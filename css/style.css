@@ -171,12 +171,12 @@ text {
 	margin-right: 120px;
 }
 #minlabel {
-	right: 0;
+	left: 0;
 	/*transform: translateX(-50%);*/
 }
 
 #maxlabel {
-	left: 0;
+	right: 0;
 	/*transform: translateX(50%);*/
 }
 
