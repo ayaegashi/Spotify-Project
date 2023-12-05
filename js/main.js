@@ -51,8 +51,9 @@ async function createVis(data) {
     artistSelectBox.addEventListener('change', artistSelection);
 
     // Create visualizations
-    bubbleVis = new BubbleVis("bubbleVis", topHits);
+
     chordVis = new ChordVis("chordVis", mostStreamed2023);
+    bubbleVis = new BubbleVis("bubbleVis", topHits);
     histVis = new HistVis("histVis", topHits);
     closerLookVis = new CloserLookVis("closerLookVis", closerLookData, 0);
 }
@@ -62,6 +63,17 @@ function bubbleSelection() {
     bubbleSelectedCategory =  document.getElementById('bubble-select').value;
     bubbleVis.selection = bubbleSelectedCategory;
     bubbleVis.wrangleData();
+
+    let newMinLabel = bubbleSelectedCategory.slice(0,4);
+    let newMaxLabel = bubbleSelectedCategory.slice(5,9);
+
+    newMinLabel = Math.max(+newMinLabel, 1999).toString();
+    newMaxLabel = Math.min(+newMaxLabel, 2019).toString();
+
+    document.getElementById('minLabel').textContent = newMinLabel;
+    document.getElementById('maxLabel').textContent = newMaxLabel;
+    histVis.selectedYear = +newMinLabel;
+    histVis.wrangleData();
 }
 
 function genreButton(id) {

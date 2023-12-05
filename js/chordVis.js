@@ -39,12 +39,12 @@ class ChordVis {
             .attr('class', "tooltip")
             .attr('id', 'questionTooltip');
 
-        vis.svg.append("circle").attr("cx", vis.width / 2 - 20).attr("cy", 0).attr("r", 8).style("fill", "#D7263D")
-        vis.svg.append("circle").attr("cx",vis.width / 2 - 20).attr("cy", 25).attr("r", 8).style("fill", "#F46036")
-        vis.svg.append("circle").attr("cx", vis.width / 2 - 20).attr("cy", 50).attr("r", 8).style("fill", "#FFD9CE")
-        vis.svg.append("text").attr("x", vis.width / 2).attr("y", 1).text("Increase in streams from previous release").style("font-size", "16px").attr("alignment-baseline","middle")
-        vis.svg.append("text").attr("x", vis.width / 2).attr("y", 26).text("Maintained streams from previous release").style("font-size", "16px").attr("alignment-baseline","middle")
-        vis.svg.append("text").attr("x", vis.width / 2).attr("y", 51).text("Decrease in streams from previous release").style("font-size", "16px").attr("alignment-baseline","middle")
+        vis.svg.append("circle").attr("cx", vis.width / 2 - 20).attr("cy", -108).attr("r", 8).style("fill", "#D7263D")
+        vis.svg.append("circle").attr("cx",vis.width / 2 - 20).attr("cy", -83).attr("r", 8).style("fill", "#F46036")
+        vis.svg.append("circle").attr("cx", vis.width / 2 - 20).attr("cy", -58).attr("r", 8).style("fill", "#FFD9CE")
+        vis.svg.append("text").attr("x", vis.width / 2).attr("y", -107).text("Increase in streams from previous release").style("font-size", "16px").attr("alignment-baseline","middle")
+        vis.svg.append("text").attr("x", vis.width / 2).attr("y", -82).text("Maintained streams from previous release").style("font-size", "16px").attr("alignment-baseline","middle")
+        vis.svg.append("text").attr("x", vis.width / 2).attr("y", -57).text("Decrease in streams from previous release").style("font-size", "16px").attr("alignment-baseline","middle")
 
         vis.svg.append("circle").attr("cx", -250).attr("cy", -270).attr("r", 20).style("fill", "grey")
             .on('mouseover', function(event, d){
@@ -82,7 +82,7 @@ class ChordVis {
         vis.svg.append("text").attr("x", -255).attr("y", -268).text("?").style("font-size", "22px").attr("alignment-baseline","middle")
 
 
-        vis.svg.append("rect").attr("x", vis.width / 2 - 40).attr("y", -20)
+        vis.svg.append("rect").attr("x", vis.width / 2 - 40).attr("y", -125)
             .attr("height", 90)
             .attr("width", 350)
             .attr("stroke", "white")
@@ -129,6 +129,8 @@ class ChordVis {
             .attr("text-anchor", 'end')
             .attr("font-size",18)
             .text("for each range of 100 million streams.")
+
+
 
         vis.wrangleData()
     }
@@ -177,7 +179,10 @@ class ChordVis {
         }
 
         // Building matrix for artists that appear more than once in hits
-        let count = 0;
+        vis.count = 0;
+        vis.increaseOnly = 0
+        vis.maintainOnly = 0
+        vis.decreaseOnly = 0
         for (const artistEntryKey in vis.artistMap) {
 
             // Count only if artist appears more than once in data set
@@ -192,6 +197,9 @@ class ChordVis {
                     return Date(date1) - Date(date2);
                 })
 
+                let allIncrease = true
+                let allMaintain = true
+                let allDecrease = true
                 // Storing transitions in matrix
                 let prevHitStreamsFloor = Math.floor( artistArray[0].streams/ vis.step)*vis.step;
                 let prevIndex = Math.floor((prevHitStreamsFloor - vis.lowerLimit) / vis.step)
@@ -202,14 +210,40 @@ class ChordVis {
                     let currIndex = Math.floor((currHitStreamsFloor - vis.lowerLimit) / vis.step)
                     vis.matrix[prevIndex][currIndex] += 1;
 
+                    if (prevIndex > currIndex) {
+                        allIncrease = false
+                        allMaintain = false
+                    }
+                    else if (prevIndex === currIndex) {
+                        allIncrease = false
+                        allDecrease = false
+                    }
+                    else {
+                        allMaintain = false
+                        allDecrease = false
+                    }
+
                     currHitStreamsFloor = prevHitStreamsFloor;
                     currIndex = prevIndex;
+
+
+
                 }
-                count++;
+                if (allIncrease) {
+                    vis.increaseOnly += 1
+                }
+                else if (allMaintain) {
+                    vis.maintainOnly += 1
+                }
+                else {
+                    vis.decreaseOnly += 1
+                }
+                vis.count += 1;
 
             }
         }
 
+        console.log(vis.increaseOnly, vis.decreaseOnly, vis.maintainOnly)
         vis.updateVis();
     }
 
@@ -333,6 +367,55 @@ class ChordVis {
             })
             .style("font-size", 9)
 
+        vis.svg.append("text")
+            .attr("x", vis.width - vis.margin.right)
+            .attr("y", 25)
+            .attr("text-anchor", 'end')
+            .attr("font-size",18)
+            .text("We can see that "+ Math.round(vis.increaseOnly / vis.count * 100) +"% of popular artists")
+
+
+        vis.svg.append("text")
+            .attr("x", vis.width - vis.margin.right)
+            .attr("y", 45)
+            .attr("text-anchor", 'end')
+            .attr("font-size",18)
+            .text("with hits in 2023 saw only major growth from")
+
+        vis.svg.append("text")
+            .attr("x", vis.width - vis.margin.right)
+            .attr("y", 65)
+            .attr("text-anchor", 'end')
+            .attr("font-size",18)
+            .text("one release to the next! A few artists ("+ Math.round(vis.maintainOnly / vis.count * 100) +"%) were")
+
+        vis.svg.append("text")
+            .attr("x", vis.width - vis.margin.right)
+            .attr("y", 85)
+            .attr("text-anchor", 'end')
+            .attr("font-size",18)
+            .text("able to maintain their level of success for all releases,")
+
+        vis.svg.append("text")
+            .attr("x", vis.width - vis.margin.right)
+            .attr("y", 105)
+            .attr("text-anchor", 'end')
+            .attr("font-size",18)
+            .text("and a significant portion (" + Math.round(vis.decreaseOnly / vis.count * 100) + "%) faced a significant loss in")
+
+        vis.svg.append("text")
+            .attr("x", vis.width - vis.margin.right)
+            .attr("y", 125)
+            .attr("text-anchor", 'end')
+            .attr("font-size",18)
+            .text("streams with every release. All remaining artists experienced")
+
+        vis.svg.append("text")
+            .attr("x", vis.width - vis.margin.right)
+            .attr("y", 145)
+            .attr("text-anchor", 'end')
+            .attr("font-size",18)
+            .text("some combination of these over multiple consecutive releases.")
 
         // Returns an array of tick angles and values for a given group and step.
         function groupTicks(d) {

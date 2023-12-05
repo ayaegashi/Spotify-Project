@@ -30,11 +30,18 @@
         </div>
     </div>
     <div class="nav">
-        <button class="next" onclick="document.getElementById('bubble-slide').scrollIntoView()">Next</button>
+        <button class="next" onclick="document.getElementById('chordVis').scrollIntoView()">Next</button>
     </div>
 </div>
 
 <div class="row filler"></div>
+<div class="row slide">
+    <div id="chordVis"></div>
+    <div class="nav">
+        <button class="prev" onclick="document.getElementById('title').scrollIntoView()">Previous</button>
+        <button class="next" onclick="document.getElementById('bubble-slide').scrollIntoView()">Next</button>
+    </div>
+</div>
 
 <div class="row slide" id="bubble-slide">
     <select name="choice" id="bubble-select" onchange="bubbleSelection()">
@@ -46,20 +53,12 @@
     </select>
     <div id="bubbleVis"></div>
     <div class="nav">
-        <button class="prev" onclick="document.getElementById('title').scrollIntoView()">Previous</button>
-        <button class="next" onclick="document.getElementById('chordVis').scrollIntoView()">Next</button>
+        <button class="prev" onclick="document.getElementById('chordVis').scrollIntoView()">Previous</button>
+        <button class="next" onclick="document.getElementById('hist-container').scrollIntoView()">Next</button>
     </div>
 </div>
 
 <div class="row filler"></div>
-
-<div class="row slide">
-    <div id="chordVis"></div>
-    <div class="nav">
-        <button class="prev" onclick="document.getElementById('bubble-slide').scrollIntoView()">Previous</button>
-        <button class="next" onclick="document.getElementById('hist-container').scrollIntoView()">Next</button>
-    </div>
-</div>
 
 <div class="row filler"></div>
 
@@ -78,7 +77,7 @@
         <br>
         <div id="summaryStats"></div>
     </div>
-    <button class="prev" onclick="document.getElementById('chordVis').scrollIntoView()">Previous</button>
+    <button class="prev" onclick="document.getElementById('bubble-slide').scrollIntoView()">Previous</button>
     <button class="next" onclick="document.getElementById('main-message').scrollIntoView()">Next</button>
 </div>
 
