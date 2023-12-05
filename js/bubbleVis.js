@@ -59,6 +59,7 @@ class BubbleVis {
             .attr("text-anchor", "end")
             .attr("font-size",17)
             .attr("color", "#C5D86D")
+            .attr("id", "directions")
             .text("Hover over a bubble to find out top artists and their hit count!")
 
         vis.svg.append("text")
@@ -174,7 +175,7 @@ class BubbleVis {
         let tickCount = 0;
         vis.simulation = d3.forceSimulation(vis.nodes)
             .force('charge', d3.forceManyBody().strength(5))
-            .force('center', d3.forceCenter(vis.width / 2, vis.height / 2))
+            .force('center', d3.forceCenter(vis.width / 2, vis.height / 2 + 100))
             .force('collision', d3.forceCollide().radius(function(d) {
                 return d.radius + 2
             }))

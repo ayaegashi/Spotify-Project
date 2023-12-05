@@ -114,6 +114,14 @@ text {
 	fill: white;
 }
 
+text#directions {
+	fill: #C5D86D;
+}
+
+div#directions {
+	color: #C5D86D;
+}
+
 .slide {
 	background-color: #171738;
 	height: 100vh;

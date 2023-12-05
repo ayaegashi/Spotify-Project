@@ -48,7 +48,7 @@ class CloserLookVis {
             .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
         // Let user know they can click on the dots
-        vis.svg.append("text").attr("font-size", 15)
+        vis.svg.append("text").attr("font-size", 15).attr("id", "directions")
             .text("Click on the dots to learn about an album!")
             .attr("text-anchor", "middle")
             .attr("transform", `translate(${vis.width / 2}, -15)`)
