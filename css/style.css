@@ -167,13 +167,21 @@ text {
 }
 
 #sliderContainer {
-	padding-top: 30px;
+	padding-top: 5%;
 }
 #minLabel {
-	left: 950px; /* Adjust the left value as needed */
+	left: 70%; /* Adjust the left value as needed */
 }
 #maxLabel {
-	right: 90px;
+	right: 10%;
+}
+
+#summaryStats {
+	padding: 10px;
+	border: 3px solid #FFD9CE;
+	width: 350px;
+	height: 300px;
+	background-color: #FFD9CE;
 }
 
 #summaryStats {
