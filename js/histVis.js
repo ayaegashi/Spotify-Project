@@ -1,3 +1,4 @@
+let selectedYear;
 class HistVis {
 
     constructor(_parentElement, _data) {
@@ -29,10 +30,10 @@ class HistVis {
         // Add a slider event listener
         d3.select("#yearRange").on("input", function() {
             // Get the selected year from the slider
-            vis.selectedYear = +this.value;
+            selectedYear = +this.value;
 
             // Update the visualization based on the selected year
-            vis.wrangleData();
+            vis.wrangleData(selectedYear);
 
         });
 
@@ -72,16 +73,19 @@ class HistVis {
             .style("fill", "white")
             .style("font-size", "12px");
 
-        vis.wrangleData();
+        vis.wrangleData(selectedYear);
 
     }
 
-    wrangleData() {
+    wrangleData(selectedYear) {
         let vis = this;
+        vis.selectedYear = selectedYear;
 
         if (vis.selectedYear === undefined){
             vis.selectedYear = 2019;
         }
+        console.log("new year!")
+        console.log(vis.selectedYear)
 
         vis.displayData = vis.data;
         vis.displayData = vis.displayData.filter(d => d.year === vis.selectedYear);
