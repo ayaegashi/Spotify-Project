@@ -43,7 +43,7 @@ class BubbleVis {
             .attr("y", 30)
             .attr("text-anchor", "middle")
             .attr("font-size", 30)
-            .text("Selected Musical Data from Between 2000 and 2020")
+            .text("Selected Musical Data from Top 2000 Hits (by Streams) Between 1998 and 2020")
 
         // Subtitle for Bubble Visualization
         vis.svg.append("text")
