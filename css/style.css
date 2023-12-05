@@ -142,8 +142,7 @@ text {
 }
 #yearRange {
 	width: 70%; /* Adjust the width as needed */
-	 /* Add margin for spacing */
-	margin-right: 100px ;
+	/* Add margin for spacing */
 	appearance: none; /* Remove default appearance */
 	background: #d3d3d3; /* Set the background color */
 	height: 10px; /* Set the height */
@@ -167,13 +166,18 @@ text {
 }
 
 #sliderContainer {
+	position: relative;
 	padding-top: 5%;
+	margin-right: 120px;
 }
-#minLabel {
-	left: 70%; /* Adjust the left value as needed */
+#minlabel {
+	right: 0;
+	/*transform: translateX(-50%);*/
 }
-#maxLabel {
-	right: 10%;
+
+#maxlabel {
+	left: 0;
+	/*transform: translateX(50%);*/
 }
 
 #summaryStats {
@@ -184,13 +188,6 @@ text {
 	background-color: #FFD9CE;
 }
 
-#summaryStats {
-	padding: 10px;
-	border: 3px solid #FFD9CE;;
-	width: 350px;
-	height: 300px;
-	background-color: #FFD9CE;
-}
 
 #inter-container{
 	padding-bottom: 200px;
