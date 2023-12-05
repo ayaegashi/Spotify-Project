@@ -15,10 +15,10 @@ class BubbleVis {
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 80, bottom: 0, left: 40};
+        vis.margin = {top: 20, right: 80, bottom: 40, left: 40};
 
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        vis.height = 540 - vis.margin.top - vis.margin.bottom;
+        vis.height = 550 - vis.margin.top - vis.margin.bottom;
 
         // SVG drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -97,7 +97,7 @@ class BubbleVis {
             .attr("y", 420)
             .attr("font-size",16)
             .attr("text-anchor", 'end')
-            .text("* Notice how in each of these timespans,")
+            .text("Notice how in each of these timespans,")
         vis.svg.append("text")
             .attr("x", vis.width - vis.margin.right + 50)
             .attr("y", 440)
