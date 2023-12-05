@@ -60,6 +60,7 @@ async function createVis(data) {
 
 
 function bubbleSelection() {
+
     bubbleSelectedCategory =  document.getElementById('bubble-select').value;
     bubbleVis.selection = bubbleSelectedCategory;
     bubbleVis.wrangleData();
@@ -70,10 +71,19 @@ function bubbleSelection() {
     newMinLabel = Math.max(+newMinLabel, 1999).toString();
     newMaxLabel = Math.min(+newMaxLabel, 2019).toString();
 
-    document.getElementById('minLabel').textContent = newMinLabel;
-    document.getElementById('maxLabel').textContent = newMaxLabel;
+    document.getElementById('minlabel').textContent = newMinLabel;
+    document.getElementById('maxlabel').textContent = newMaxLabel;
+
+    let slider = document.getElementById('yearRange');
+
+    // Set new min and max values for the slider
+    slider.min = newMinLabel;
+    slider.max = newMaxLabel;
+
+
     histVis.selectedYear = +newMinLabel;
-    histVis.wrangleData();
+
+    histVis.wrangleData(histVis.selectedYear);
 }
 
 function genreButton(id) {
